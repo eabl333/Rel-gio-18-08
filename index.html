@@ -14,59 +14,61 @@
 
         body {
             min-height: 100vh;
-            min-height: 100dvh; /* Para celular (dynamic viewport height) */
+            min-height: 100dvh;
             background: radial-gradient(ellipse at 50% 50%, #0a1a3a, #040812);
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
-            padding: 20px;
+            padding: 16px;
             background-image: 
                 linear-gradient(rgba(0, 100, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 100, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
         }
 
-        /* CONTAINER - OCUPA QUASE TODA A TELA */
+        /* CONTAINER - MAIS LARGO E COM PADDING MENOR */
         .toggle-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 25px;
+            gap: 18px;
             background: rgba(10, 14, 23, 0.75);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 50px 40px;
-            border-radius: 40px;
+            padding: 35px 20px;
+            border-radius: 32px;
             border: 1px solid rgba(59, 130, 246, 0.2);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-            width: 92%;
-            max-width: 380px;
+            width: 96%;
+            max-width: 400px;
+            min-width: 280px;
         }
 
         .toggle-container h2 {
             color: #93c5fd;
-            font-size: 18px;
-            letter-spacing: 6px;
+            font-size: 14px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             font-weight: 400;
             opacity: 0.6;
             text-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+            margin-bottom: 5px;
         }
 
         /* ======================== */
-        /* TOGGLE GRANDE (FÁCIL DE VER) */
+        /* TOGGLE - TAMANHO IDEAL */
         /* ======================== */
         .toggle {
             position: relative;
-            width: 110px;
-            height: 56px;
+            width: 90px;
+            height: 48px;
             cursor: pointer;
-            margin: 10px 0;
+            margin: 5px 0;
+            flex-shrink: 0;
         }
 
-        /* ESCONDE O CHECKBOX */
         .toggle input {
             width: 0;
             height: 0;
@@ -74,7 +76,6 @@
             position: absolute;
         }
 
-        /* LABEL = BOTÃO VISÍVEL */
         .toggle label {
             position: absolute;
             top: 0;
@@ -89,14 +90,13 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* BOLINHA GRANDE */
         .toggle label::after {
             content: '';
             position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 44px;
-            height: 44px;
+            top: 4px;
+            left: 4px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(180deg, #888, #3a3a3a);
             border-radius: 50%;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -104,9 +104,191 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* ESTADO ATIVADO (CHECKED) - FUNDO AZUL NEON */
         .toggle input:checked + label {
             background: #1a4cff;
+            box-shadow: 
+                0 0 30px rgba(26, 76, 255, 0.5),
+                inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle input:checked + label::after {
+            left: 46px;
+            transform: translateX(0);
+            background: linear-gradient(180deg, #ffffff, #a0c0ff);
+            box-shadow: 0 4px 20px rgba(26, 76, 255, 0.3);
+        }
+
+        .toggle input:active + label::after {
+            width: 44px;
+        }
+        .toggle input:checked:active + label::after {
+            width: 44px;
+        }
+
+        /* STATUS - AGORA COM ESPAÇO SUFICIENTE */
+        .status {
+            color: #64748b;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            transition: color 0.4s ease;
+            margin-top: 8px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
+            padding: 0 10px; /* DÁ UM RESPIRO NAS LATERAIS */
+            min-width: 120px; /* GARANTE ESPAÇO PARA O TEXTO */
+            text-align: center;
+        }
+
+        .toggle input:checked ~ .status {
+            color: #60a5fa;
+            text-shadow: 0 0 30px rgba(26, 76, 255, 0.2);
+        }
+
+        /* ÍCONE */
+        .icon {
+            font-size: 24px;
+            margin-bottom: 2px;
+            opacity: 0.4;
+            transition: opacity 0.4s ease;
+        }
+
+        .toggle input:checked ~ .icon {
+            opacity: 1;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVO PARA TELAS PEQUENAS (AJUSTADO) */
+        /* ============================================ */
+        @media (max-width: 480px) {
+            .toggle-container {
+                padding: 28px 16px;
+                gap: 14px;
+                border-radius: 28px;
+                width: 98%;
+            }
+
+            .toggle-container h2 {
+                font-size: 12px;
+                letter-spacing: 3px;
+            }
+
+            .toggle {
+                width: 76px;
+                height: 40px;
+            }
+
+            .toggle label::after {
+                width: 30px;
+                height: 30px;
+                top: 4px;
+                left: 4px;
+            }
+
+            .toggle input:checked + label::after {
+                left: 40px;
+            }
+
+            .toggle input:active + label::after {
+                width: 36px;
+            }
+            .toggle input:checked:active + label::after {
+                width: 36px;
+            }
+
+            .status {
+                font-size: 15px;
+                letter-spacing: 2px;
+                min-width: 100px;
+                padding: 0 6px;
+            }
+
+            .icon {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .toggle-container {
+                padding: 20px 12px;
+                gap: 10px;
+                border-radius: 24px;
+            }
+
+            .toggle-container h2 {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+
+            .toggle {
+                width: 64px;
+                height: 34px;
+            }
+
+            .toggle label::after {
+                width: 24px;
+                height: 24px;
+                top: 3px;
+                left: 3px;
+            }
+
+            .toggle input:checked + label::after {
+                left: 35px;
+            }
+
+            .toggle input:active + label::after {
+                width: 30px;
+            }
+            .toggle input:checked:active + label::after {
+                width: 30px;
+            }
+
+            .status {
+                font-size: 13px;
+                letter-spacing: 1px;
+                min-width: 80px;
+                padding: 0 4px;
+            }
+
+            .icon {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toggle-container">
+        <div class="icon">💡</div>
+        <h2>⚡ TOGGLE</h2>
+        
+        <div class="toggle">
+            <input type="checkbox" id="toggleBtn">
+            <label for="toggleBtn"></label>
+            <span class="status">● DESLIGADO</span>
+        </div>
+    </div>
+
+    <script>
+        const checkbox = document.getElementById('toggleBtn');
+        const statusText = document.querySelector('.status');
+        const icon = document.querySelector('.icon');
+
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                statusText.textContent = '● LIGADO';
+                statusText.style.color = '#60a5fa';
+                icon.textContent = '⚡';
+            } else {
+                statusText.textContent = '● DESLIGADO';
+                statusText.style.color = '#64748b';
+                icon.textContent = '💡';
+            }
+        });
+    </script>
+
+</body>
+</html>            background: #1a4cff;
             box-shadow: 
                 0 0 30px rgba(26, 76, 255, 0.5),
                 inset 0 0 20px rgba(0, 0, 0, 0.2);
