@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relógio Digital - Fundo Azul Escuro</title>
+    <title>Relógio Digital - Fundo Escuro</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* RESET E FUNDO AZUL ESCURO (GRADIENTE) */
+        /* RESET E FUNDO AZUL ESCURO */
         * {
             margin: 0;
             padding: 0;
@@ -15,21 +15,19 @@
 
         body {
             min-height: 100vh;
-            /* Fundo azul escuro profundo com leve degradê */
             background: radial-gradient(ellipse at 50% 50%, #0a1a3a, #040812);
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Orbitron', monospace;
             padding: 20px;
-            /* Grade sutil de fundo para dar textura (opcional, mas fica lindo) */
             background-image: 
                 linear-gradient(rgba(0, 100, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 100, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
         }
 
-        /* CARTÃO COM EFEITO GLASS (transparente, com borda azul) */
+        /* CARTÃO COM EFEITO GLASS */
         .clock-container {
             background: rgba(6, 14, 36, 0.65);
             backdrop-filter: blur(12px);
@@ -44,7 +42,6 @@
             position: relative;
         }
 
-        /* Pequena linha decorativa no topo */
         .clock-label {
             font-size: 11px;
             color: #60a5fa;
@@ -55,27 +52,23 @@
             opacity: 0.5;
         }
 
-        /* HORAS, MINUTOS, SEGUNDOS - TODOS BRANCOS E NÍTIDOS */
         .time {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
             font-weight: 900;
-            font-size: 0; /* Remove espaços extras */
+            font-size: 0;
         }
 
         .time span {
             font-size: 130px;
             line-height: 1;
             letter-spacing: 5px;
-            /* BRANCO PURO para máxima legibilidade */
             color: #ffffff;
-            /* Sombra azul suave (pouco blur para não borrar) */
             text-shadow: 0 0 12px rgba(0, 100, 255, 0.3);
         }
 
-        /* DOIS PONTOS (:) PISCANDO - BRANCOS TAMBÉM */
         .blink {
             font-size: 130px;
             line-height: 1;
@@ -90,7 +83,6 @@
             50% { opacity: 0.1; }
         }
 
-        /* DIA DA SEMANA E DATA - AZUL CLARO (fácil de ler) */
         .date {
             margin-top: 20px;
             font-size: 20px;
@@ -104,7 +96,6 @@
             text-shadow: 0 0 10px rgba(0, 50, 255, 0.1);
         }
 
-        /* VERSÃO RESPONSIVA PARA CELULAR (VISUALIZAÇÃO DO SHORTS) */
         @media (max-width: 600px) {
             .clock-container {
                 padding: 30px 20px;
@@ -147,21 +138,17 @@
     </div>
 
     <script>
-        // Função principal que atualiza o relógio
         function updateClock() {
             const now = new Date();
 
-            // --- PEGANDO HORAS, MINUTOS E SEGUNDOS ---
             let hours = now.getHours().toString().padStart(2, '0');
             let minutes = now.getMinutes().toString().padStart(2, '0');
             let seconds = now.getSeconds().toString().padStart(2, '0');
 
-            // --- ATUALIZANDO O HTML ---
             document.getElementById('hours').textContent = hours;
             document.getElementById('minutes').textContent = minutes;
             document.getElementById('seconds').textContent = seconds;
 
-            // --- PEGANDO DIA DA SEMANA E DATA (FORMATO BRASIL) ---
             const daysOfWeek = ['DOMINGO', 'SEGUNDA-FEIRA', 'TERÇA-FEIRA', 'QUARTA-FEIRA', 'QUINTA-FEIRA', 'SEXTA-FEIRA', 'SÁBADO'];
             const dayName = daysOfWeek[now.getDay()];
             const day = now.getDate().toString().padStart(2, '0');
@@ -171,10 +158,7 @@
             document.getElementById('dateDisplay').textContent = `${dayName}, ${day}/${month}/${year}`;
         }
 
-        // Atualiza a cada 1 segundo
         setInterval(updateClock, 1000);
-
-        // Chama imediatamente para não aparecer "00:00:00"
         updateClock();
     </script>
 
