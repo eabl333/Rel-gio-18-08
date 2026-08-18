@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Toggle Moderno - Celular</title>
+    <title>Lâmpada com Toggle</title>
     <style>
         /* RESET E FUNDO */
         * {
@@ -27,23 +27,44 @@
             background-size: 40px 40px;
         }
 
-        /* CONTAINER - MAIS LARGO E COM PADDING MENOR */
+        /* CONTAINER */
         .toggle-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 18px;
+            gap: 25px;
             background: rgba(10, 14, 23, 0.75);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 35px 20px;
+            padding: 40px 30px;
             border-radius: 32px;
             border: 1px solid rgba(59, 130, 246, 0.2);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
             width: 96%;
             max-width: 400px;
-            min-width: 280px;
+            position: relative;
+        }
+
+        /* ======================== */
+        /* SEU NOME - ERICK CRIADOR DE SITES */
+        /* ======================== */
+        .brand {
+            font-size: 12px;
+            color: rgba(147, 197, 253, 0.4);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 400;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            padding-top: 15px;
+            margin-top: 5px;
+            width: 100%;
+            text-align: center;
+            transition: color 0.4s ease;
+        }
+
+        .brand.on {
+            color: rgba(251, 191, 36, 0.6);
         }
 
         .toggle-container h2 {
@@ -58,7 +79,29 @@
         }
 
         /* ======================== */
-        /* TOGGLE - TAMANHO IDEAL */
+        /* LÂMPADA */
+        /* ======================== */
+        .lamp {
+            font-size: 80px;
+            line-height: 1;
+            margin: 10px 0;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.05));
+            user-select: none;
+        }
+
+        .lamp.on {
+            filter: drop-shadow(0 0 40px rgba(255, 200, 50, 0.8));
+            animation: brilho 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes brilho {
+            0% { filter: drop-shadow(0 0 30px rgba(255, 200, 50, 0.5)); }
+            100% { filter: drop-shadow(0 0 70px rgba(255, 200, 50, 1)); }
+        }
+
+        /* ======================== */
+        /* TOGGLE */
         /* ======================== */
         .toggle {
             position: relative;
@@ -104,20 +147,22 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        /* LIGADO - Fundo amarelo */
         .toggle input:checked + label {
-            background: #1a4cff;
+            background: #fbbf24;
             box-shadow: 
-                0 0 30px rgba(26, 76, 255, 0.5),
+                0 0 30px rgba(251, 191, 36, 0.5),
                 inset 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
         .toggle input:checked + label::after {
             left: 46px;
             transform: translateX(0);
-            background: linear-gradient(180deg, #ffffff, #a0c0ff);
-            box-shadow: 0 4px 20px rgba(26, 76, 255, 0.3);
+            background: linear-gradient(180deg, #ffffff, #fde68a);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
         }
 
+        /* EFEITO DE CLIQUE */
         .toggle input:active + label::after {
             width: 44px;
         }
@@ -125,45 +170,13 @@
             width: 44px;
         }
 
-        /* STATUS - AGORA COM ESPAÇO SUFICIENTE */
-        .status {
-            color: #64748b;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            transition: color 0.4s ease;
-            margin-top: 8px;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
-            padding: 0 10px; /* DÁ UM RESPIRO NAS LATERAIS */
-            min-width: 120px; /* GARANTE ESPAÇO PARA O TEXTO */
-            text-align: center;
-        }
-
-        .toggle input:checked ~ .status {
-            color: #60a5fa;
-            text-shadow: 0 0 30px rgba(26, 76, 255, 0.2);
-        }
-
-        /* ÍCONE */
-        .icon {
-            font-size: 24px;
-            margin-bottom: 2px;
-            opacity: 0.4;
-            transition: opacity 0.4s ease;
-        }
-
-        .toggle input:checked ~ .icon {
-            opacity: 1;
-        }
-
         /* ============================================ */
-        /* RESPONSIVO PARA TELAS PEQUENAS (AJUSTADO) */
+        /* RESPONSIVO */
         /* ============================================ */
         @media (max-width: 480px) {
             .toggle-container {
-                padding: 28px 16px;
-                gap: 14px;
+                padding: 30px 20px;
+                gap: 20px;
                 border-radius: 28px;
                 width: 98%;
             }
@@ -171,6 +184,10 @@
             .toggle-container h2 {
                 font-size: 12px;
                 letter-spacing: 3px;
+            }
+
+            .lamp {
+                font-size: 60px;
             }
 
             .toggle {
@@ -196,28 +213,27 @@
                 width: 36px;
             }
 
-            .status {
-                font-size: 15px;
+            .brand {
+                font-size: 10px;
                 letter-spacing: 2px;
-                min-width: 100px;
-                padding: 0 6px;
-            }
-
-            .icon {
-                font-size: 20px;
+                padding-top: 12px;
             }
         }
 
         @media (max-width: 360px) {
             .toggle-container {
-                padding: 20px 12px;
-                gap: 10px;
+                padding: 20px 16px;
+                gap: 15px;
                 border-radius: 24px;
             }
 
             .toggle-container h2 {
                 font-size: 10px;
                 letter-spacing: 2px;
+            }
+
+            .lamp {
+                font-size: 50px;
             }
 
             .toggle {
@@ -243,15 +259,10 @@
                 width: 30px;
             }
 
-            .status {
-                font-size: 13px;
+            .brand {
+                font-size: 9px;
                 letter-spacing: 1px;
-                min-width: 80px;
-                padding: 0 4px;
-            }
-
-            .icon {
-                font-size: 18px;
+                padding-top: 10px;
             }
         }
     </style>
@@ -259,30 +270,35 @@
 <body>
 
     <div class="toggle-container">
-        <div class="icon">💡</div>
-        <h2>⚡ TOGGLE</h2>
+        <h2>💡 LÂMPADA</h2>
         
+        <!-- LÂMPADA -->
+        <div class="lamp" id="lamp">💡</div>
+        
+        <!-- TOGGLE -->
         <div class="toggle">
             <input type="checkbox" id="toggleBtn">
             <label for="toggleBtn"></label>
-            
         </div>
+
+        <!-- SEU NOME -->
+        <div class="brand" id="brand">Erick Criador de Sites</div>
     </div>
 
     <script>
         const checkbox = document.getElementById('toggleBtn');
-        const statusText = document.querySelector('.status');
-        const icon = document.querySelector('.icon');
+        const lamp = document.getElementById('lamp');
+        const brand = document.getElementById('brand');
 
         checkbox.addEventListener('change', function() {
             if (this.checked) {
-                statusText.textContent = '● LIGADO';
-                statusText.style.color = '#60a5fa';
-                icon.textContent = '⚡';
+                lamp.textContent = '💡';
+                lamp.classList.add('on');
+                brand.classList.add('on');
             } else {
-                statusText.textContent = '● DESLIGADO';
-                statusText.style.color = '#64748b';
-                icon.textContent = '💡';
+                lamp.textContent = '💡';
+                lamp.classList.remove('on');
+                brand.classList.remove('on');
             }
         });
     </script>
